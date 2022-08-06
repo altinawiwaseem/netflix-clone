@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "../fetch";
-
+import "./Row.css";
 /* img base url */
-const baseUrl = "https://image.tmdb.org/t/p/w300/";
+const baseUrl = "https://image.tmdb.org/t/p/original/";
 
 function Row({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
-  const a = 5;
-  console.log(a);
 
   useEffect(() => {
     async function fetchData() {
@@ -22,11 +20,17 @@ function Row({ title, fetchUrl }) {
   return (
     <div className="row">
       <h2>{title}</h2>
-      <div className="row_posters"></div>
-      {/* several row_posters */}
-      {movies.map((movie) => (
-        <img src={baseUrl + movie.backdrop_path} alt={movie.name} />
-      ))}
+      <div className="row_posters" >
+        {/* several row_posters */}
+        {movies.map((movie) => (
+          <img
+          key={movie.id}
+            className="row_poster"
+            src={baseUrl + movie.poster_path}
+            alt={movie.name}
+          />
+        ))}
+      </div>
     </div>
   );
 }
